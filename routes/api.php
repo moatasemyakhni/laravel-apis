@@ -9,3 +9,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('sorted_string/{word}', [ApiController::class, 'sortString']);
+
+Route::get('break_number/{number}', [ApiController::class, 'breakNumber']);
