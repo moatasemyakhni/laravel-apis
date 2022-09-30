@@ -90,4 +90,39 @@ class ApiController extends Controller
 
         return response()->json([$sentence => implode($sen)]);
     }
+
+    function prefixOutput(Request $req) {
+        $exp = $req->exp;
+        // remove white spaces
+        $sentence = explode(' ', $exp);
+
+        $newArr = [];
+        for($i=sizeof($sentence)-1;$i>=0;$i--) {
+            if(is_numeric($sentence[$i])) {
+                $newArr[] = intval($sentence[$i]);
+            }else {
+                $nb1 = array_pop($newArr);
+                $nb2 = array_pop($newArr);
+                switch($sentence[$i]) {
+                    case '+': 
+                        $newArr[] = $nb1 + $nb2;
+                        break;
+
+                    case '-':
+                        $newArr[] = $nb1 - $nb2;
+                        break;
+                    
+                    case '*':
+                        $newArr[] = $nb1 * $nb2;
+                        break;
+                    
+                    case '/':
+                        $newArr[] = $nb1 / $nb2;
+                        break;
+                }
+            }
+        }
+
+        return response()->json([$exp => $newArr[sizeof($newArr) - 1]]);
+    }
 }
