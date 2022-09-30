@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 class ApiController extends Controller
 {
     function sortString(Request $req) {
+        //get string
         $word = $req->word;
+        // array that will contain the numbers of the string
         $nbArr = [];
         $letters = str_split($word);
-
+        // sort with respect to lower and upper cases
+        natcasesort($letters);
         foreach($letters as $nb) {
             if(!is_numeric($nb))
                 break;
