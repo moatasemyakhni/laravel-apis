@@ -14,13 +14,15 @@ class ApiController extends Controller
         $letters = str_split($word);
         // sort with respect to lower and upper cases
         natcasesort($letters);
+
+        // natcasesort sorts number at first so we will loop through the array to take numbers(and delete them from original array) and once we reach a char that is not a number it will break 
         foreach($letters as $nb) {
             if(!is_numeric($nb))
                 break;
             else
                 $nbArr[] = array_shift($letters);
         }
-
+        // natcasesort prefers uppercase char over lowercase so we substitute them to get what we want.
         for($i=0;$i<sizeof($letters)-1;$i++) {
             $j = $i + 1;
             if(strtolower($letters[$i]) === $letters[$j]) {
@@ -29,7 +31,7 @@ class ApiController extends Controller
                 $letters[$j] = $temp;
             }
         }
-
+        
         foreach($nbArr as $nb) {
             $letters[] = $nb;
         }
