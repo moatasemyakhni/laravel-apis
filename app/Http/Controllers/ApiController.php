@@ -31,11 +31,35 @@ class ApiController extends Controller
                 $letters[$j] = $temp;
             }
         }
-        
+
         foreach($nbArr as $nb) {
             $letters[] = $nb;
         }
 
         return response()->json([$word => implode($letters)]);
+    }
+
+
+    function breakNumber(Request $req) {
+        $word = $req->number;
+        $number = str_split($word);
+        $i = 0;
+        if($number[0] === '-') {
+            $x = 1;
+            $is_negative = true;
+        }else {
+            $x = 0;
+            $is_negative = false;
+        }
+        $newArr = [];
+        for($i=$x;$i<sizeof($number);$i++) {
+            $number[$i] = $number[$i] * pow(10, sizeof($number) - 1 - $i);
+            if($is_negative)
+                $newArr[] = - $number[$i];
+            else
+                $newArr[] = $number[$i];
+        }
+
+        return response()->json([$word => $newArr]);
     }
 }
