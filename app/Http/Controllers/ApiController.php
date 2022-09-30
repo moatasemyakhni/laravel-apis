@@ -63,4 +63,31 @@ class ApiController extends Controller
 
         return response()->json([$word => $newArr]);
     }
+
+    function numberToBinary(Request $req) {
+        $sentence = $req->sentence;
+        $sen = str_split($sentence);
+
+        $counter = 0;
+
+        $completeNumber = "";
+        for($i=0;$i<sizeof($sen);$i++) {
+            if(is_numeric($sen[$i])) {
+                $current = $i;
+                while(is_numeric($sen[$i])) {
+                    $completeNumber .= $sen[$i];
+                    $counter++;
+                    $i++;
+                    if($i == sizeof($sen))
+                        break;
+                }
+                array_splice($sen, $current, $counter, decbin($completeNumber));
+                $counter = 0;
+                $completeNumber = "";
+                $i -= 1;
+            }
+        }
+
+        return response()->json([$sentence => implode($sen)]);
+    }
 }
