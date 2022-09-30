@@ -67,9 +67,9 @@ class ApiController extends Controller
     function numberToBinary(Request $req) {
         $sentence = $req->sentence;
         $sen = str_split($sentence);
-
+        // how many chars will be replaced
         $counter = 0;
-
+        // when splitting the original array, each number will be stored temporarily in completeNumber
         $completeNumber = "";
         for($i=0;$i<sizeof($sen);$i++) {
             if(is_numeric($sen[$i])) {
