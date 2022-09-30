@@ -13,3 +13,5 @@ Route::get('sorted_string/{word}', [ApiController::class, 'sortString']);
 Route::get('break_number/{number}', [ApiController::class, 'breakNumber']);
 
 Route::get('number_to_binary/{sentence}', [ApiController::class, 'numberToBinary']);
+
+Route::get('prefix/{exp}', [ApiController::class, 'prefixOutput']);
