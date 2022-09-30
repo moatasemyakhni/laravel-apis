@@ -52,6 +52,7 @@ class ApiController extends Controller
             $is_negative = false;
         }
         $newArr = [];
+        // index is dependent on x so that in case the number is negative, there will be no need to pass through '-' sign
         for($i=$x;$i<sizeof($number);$i++) {
             $number[$i] = $number[$i] * pow(10, sizeof($number) - 1 - $i);
             if($is_negative)
